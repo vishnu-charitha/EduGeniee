@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h2>EduGenie</h2>
+
+        </div>
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-robot"></i>
+                <span>Ask AI</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-book-open"></i>
+                <span>Explain</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quiz</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Summary</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-road"></i>
+                <span>Learning Path</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>History</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Analytics</span>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="workspace">
+
+        <!-- Header -->
+
+        <!-- ================= Header ================= -->
+
+<header class="topbar">
+
+    <div>
+
+        <h1>
+
+            Welcome,
+
+            <span id="username">
+
+                User
+
+            </span>
+
+            👋
+
+        </h1>
+
+        <p>
+
+            Learn Smarter using Artificial Intelligence
+
+        </p>
+
+    </div>
+
+    <div class="top-icons">
+
+        <button class="icon-btn">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </button>
+
+        <button class="icon-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+        <div
+            class="avatar"
+            id="avatar">
+
+            U
+
+        </div>
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <h2>EduGenie AI Assistant</h2>
+
+            <p>
+
+                Ask questions, generate quizzes, summarize notes,
+                explain difficult concepts and build personalized
+                learning paths.
+
+            </p>
+
+        </section>
+
+        <!-- Prompt -->
+
+        <section class="prompt-box">
+
+            <textarea
+                id="prompt"
+                placeholder="Ask anything about Computer Science, Mathematics, AI, DBMS, DSA..."></textarea>
+
+        </section>
+
+        <!-- Controls -->
+
+        <section class="controls">
+
+            <div>
+
+                <label>
+
+                    AI Task
+
+                </label>
+
+                <select id="task">
+
+                    <option value="question">
+                        Question Answering
+                    </option>
+
+                    <option value="explanation">
+                        Concept Explanation
+                    </option>
+
+                    <option value="quiz">
+                        Quiz Generation
+                    </option>
+
+                    <option value="summary">
+                        Text Summarization
+                    </option>
+
+                    <option value="learning">
+                        Learning Path
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                id="generateBtn"
+                class="generate-btn">
+
+                ✨ Generate
+
+            </button>
+
+        </section>
+
+        <!-- AI Response -->
+
+        <section class="response-card">
+
+            <div class="response-header">
+
+                <div class="response-title">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    EduGenie AI
+
+                </div>
+
+                <div class="response-tools">
+
+                    <button id="copyBtn">
+
+                        <i class="fa-solid fa-copy"></i>
+
+                    </button>
+
+                    <button id="clearBtn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                    <span id="status">
+
+                        Ready
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div id="chatArea" class="chat-area">
+
+    <div class="welcome">
+
+        <h2>
+
+            👋 Welcome to EduGenie
+
+        </h2>
+
+        <p>
+
+            Start your learning journey by asking your first question.
+
+        </p>
+
+    </div>
+
+</div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= Right Panel ================= -->
+
+    <aside class="right-panel">
+
+        <h2>
+
+            Dashboard
+
+        </h2>
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <h3>Questions</h3>
+
+                <span id="questionCount">0</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Quizzes</h3>
+
+                <span id="quizCount">0</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Summaries</h3>
+
+                <span id="summaryCount">0</span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Learning Paths</h3>
+
+                <span id="pathCount">0</span>
+
+            </div>
+
+        </div>
+
+        <h2 class="history-title">
+
+            Recent Activity
+
+        </h2>
+
+        <div
+            id="history"
+            class="history">
+
+        </div>
+
+    </aside>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</div>
+
+{% endblock %}
